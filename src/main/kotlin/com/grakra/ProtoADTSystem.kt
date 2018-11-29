@@ -7,10 +7,12 @@ class ProtoADTSystem(val codeGeneratorRequest: CodeGeneratorRequest) {
   val pkgMap = getPackageMap(codeGeneratorRequest)
 
   inline fun <reified T> getTargetFromClass(clz: Class<T>): ReferencedProtoADT {
-    return clz.canonicalName.split('.').let{
+    return clz.canonicalName.split('.').let {
       it.dropLast(1).joinToString(".") to it.last()
-    }.let{(pkg, name) ->
-      types[".${pkgMap[pkg]}.$name"]!!
+    }.let { (pkg, name) ->
+      listOf(pkgMap[pkg]!!, name).filter { !it.isEmpty() }.joinToString("") { ".$it" }
+    }.let {
+      types[it]!!
     }
   }
 

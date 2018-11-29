@@ -137,7 +137,7 @@ fun getPackageMap(r: CodeGeneratorRequest): Map<String, String> {
   return r.protoFileList.map { proto ->
     val javaPkg = proto.options?.javaPackage
     val javaOuterCls = proto.options?.javaOuterClassname
-    val prefix = listOf(javaPkg, javaOuterCls).filter { it != null }.joinToString(".")
+    val prefix = listOf(javaPkg, javaOuterCls).filter { it != null && !it.isEmpty() }.joinToString(".")
     prefix to proto.`package`
   }.toMap()
 }

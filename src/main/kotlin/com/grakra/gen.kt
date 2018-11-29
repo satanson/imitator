@@ -1,5 +1,7 @@
 package com.grakra
 
+import org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos
+import org.apache.hadoop.hdfs.protocol.proto.HdfsProtos
 import org.apache.hadoop.hdfs.qjournal.protocol.QJournalProtocolProtos
 import java.io.File
 
@@ -17,7 +19,7 @@ fun main(vararg args: String) {
     it.pkgMap.map{"${it.key}=>${it.value}"}.joinToString("\n").let{
      // print(it)
     }
-  it.getTargetFromClass(QJournalProtocolProtos.RequestInfoProto::class.java)
+  it.getADT(QJournalProtocolProtos.RequestInfoProto::class.java)
   }.let{
     println(it)
   }
